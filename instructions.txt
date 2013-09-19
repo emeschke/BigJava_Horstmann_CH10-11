@@ -22,7 +22,7 @@ R11.21 ActionListener versus MouseListener
 
 Programming Exercises: Name your packages according to the Programming Exercise identifier, except
 replace the period with underscore. You will want a Driver class (with a static main() method) to drive your program.
-See package P0_3 for an example.
+
 
 10 points each
 P10.2 ButtonViewer
