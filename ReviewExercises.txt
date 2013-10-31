@@ -2,6 +2,45 @@
 # Use this file to answer Review Exercises from the Big Java textbook
 #########################################################################
 
+R10.5 An event object is an object that is instantiated from one of the classes that passes information between an event source and an event
+listener.  The event source is the user-interface component, such as a button, that generates a particular event.  The event listeners objects
+process events that are passed to them and provide methods to act when they are triggered.
+
+R10.6 When an action is performed, the Java event handling library calls listener.actionPerformed(event).  The call to the actionPerformed
+method occurs when an event happens.
+
+R10.11 Inner classes are useful for listener classes for two reasons--first, because listener classes tend to be very short so they can be
+incorporated very succinctly.  Secondly, they are useful because the inner class can access all the instance variables and methods of the
+outer class.  It would be possible to implement the listener as a regular class, but it is unnattractive because the listener would need
+to be constructed with a reference to the label field.
+
+R10.14 A method JTextArea implements is "void append(Str string)," it appends the given text to the end of the document.  A method JTextArea
+inherits from JTextComponent is "public void copy()," which transfers the currently selected range in the associated text model to the system
+clipboard, leaving the contents in the text model. A methodJTextArea inherits from Jcomponent is "public void
+removeAncestorListener(AncestorListener listener)," which unregisters listener so that it will no longer receive AncestorEvents.
+
+R10.22 To change the color to any other color you would alter the code in Step 3-- g.setColor(Color.GREEN) and g.SetColor(Color.RED) to
+whichever arbitrary colors on the left and right.
+
+R11.2 The advantage of using a layout manager is that there are some general zones that are defined so the programmer doesn't have to
+do as much trial and error to get the compononets of a frame arranged in a pleasing way.
+
+R11.11 A ButtonGroup is necessary for radio buttons but not for check boxes because radio buttons are mutually exclusive (only one can be
+selected) while check boxes are not.
+
+R11.19 An ActionEvent is a simpler event than a MouseEvent.  The action listener only has one method, to respond when the action has been
+performed, as compared with the MouseEvent that has methods to respond to click, press, release, entered, and exited.
+
+R11.20 An ActionEvent object:
+String getActionCommand -- a string that can be set.
+int getModifiers-- an int that returns the keys that were used to trigger the event
+Object getSource-- the Object that triggered the event.
+
+The MouseEvent also carries information about the x and y position on the screen and whether any buttons have changed their state as a result
+of the action.
+
+R11.21 The action listener has only one method because it listens to a single event, while a mouse click is more complicated because it depends
+on the position of the mouse as well as the combination of buttons pressed so it has more methods to capture the additional complexity.
 
 
 
