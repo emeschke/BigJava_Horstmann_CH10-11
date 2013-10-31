@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +12,15 @@ import java.util.ArrayList;
  * Date: 10/30/13
  * Time: 8:21 PM
  * To change this template use File | Settings | File Templates.
+A general overview--buttons and graphics get imported from the gui builder.  Main is called to create the RestaurantBill
+ object.  RestaurantBill class is defined (more below.) A last method populates an array of type MenuItem.  The MenuItem
+ type stores a name, price and quantity of food and has methods to call and set each.
+
+The RestaurantBill class has inner classes that create cover the different actions required of the buttons and text
+ boxes.  The food buttons increment the appropriate counter in the arraylist by one, the text boxes and associated button
+ adds a new menu item and its price to the array, and the calculateBill button calculates the price, tax, tip and total.
+
+
  */
 public class RestaurantBill {
     private JButton cokeButton;
@@ -28,6 +38,7 @@ public class RestaurantBill {
     private JTextField textField2;
     private JTextArea textArea1;
     private JButton calculateBillButton;
+    private JButton addItemButton;
 
 
     public static void main(String[] args) {
@@ -45,8 +56,7 @@ public class RestaurantBill {
     public RestaurantBill(){
         final ArrayList<MenuItem> menuBill = addItems();
 
-        //A class is declared that adds one to the correct class in menuBill when an action event is triggered,
-        //the object that stores the menu and number of each purchased.
+        //A class is declared that adds one to the correct class in menuBill wen the associated item is purchased.
 
         class MenuListener implements ActionListener{
             int choice;
@@ -91,32 +101,57 @@ public class RestaurantBill {
         ActionListener iceCreamL = new MenuListener(9);
         iceCreamButton.addActionListener(iceCreamL);
 
-        //An inner class to read in the two text fields.  It will then check that the price is a valid double value.
-        //If it is not reasonable (0<price<100) it will assign the NaN to the price.  It will then enter the price
-        //in the ArrayList as a one-off purchase if the inputs are valid.
+        //An inner class to read in the two text fields when the button AddItem is clicked.  It will then check that the
+        // price is a valid double value.  If it is not reasonable (price<0) it will assign the NaN to the price.
+        // It will then enter the price in the ArrayList as a one-off purchase if the inputs are valid.
+        class AddItemListener implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    String strNewItem = textField1.getText();
+                    double newPrice = Double.parseDouble(textField2.getText());
+                    //Create new menu item, set count to 1, add it to the menuItem array.
+                    if (newPrice< 0){
+                        newPrice = Double.NaN;
+                    }
+                    MenuItem newItem = new MenuItem(strNewItem, newPrice);
+                    newItem.setCount(1);
+                    menuBill.add(newItem);
+                    //System.out.println("added");
+                    //Clear text field.
+                    textField1.setText("");
+                    textField2.setText("");
 
+                }
+                catch(NumberFormatException e1){
+                    //System.out.println("Didn't work");
+                    //What to put here, how to validate input in these things?
+                }
+            }
+        }
 
-
-
-
+        ActionListener addItemL = new AddItemListener();
+        addItemButton.addActionListener(addItemL);
 
         //An inner class is declared for the button that calculates the total bill.  Its action performed is to
-        //print all of the purchases by number and then price, and then print sub-total, tax, tip and total in the
-        //text area.  Couldn't figure out how to get the formatting correct on the decimal places.
+        //print all of the purchases by number and then total price, and then print sub-total, tax, tip and total in the
+        //text area.
         class BillListener implements ActionListener{
             double totalBill = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
-                textArea1.append("\n");
+                textArea1.append("\n************************************************\n");
                 for (int i = 0; i < menuBill.size(); i++) {
-                    textArea1.append(menuBill.get(i).getName() + " x" + menuBill.get(i).getCount() + " $" +
-                    menuBill.get(i).getCount()*menuBill.get(i).getPrice()+ "\n");
-                    totalBill += menuBill.get(i).getCount()*menuBill.get(i).getPrice();
+                    if(menuBill.get(i).getCount()>0){
+                        textArea1.append(menuBill.get(i).getName() + " x" + menuBill.get(i).getCount() + " $" +
+                        menuBill.get(i).getCount()*menuBill.get(i).getPrice()+ "\n");
+                        totalBill += menuBill.get(i).getCount()*menuBill.get(i).getPrice();
+                    }
                 }
-                textArea1.append("Food and drink total is: $" + String.format("%.2g%n", totalBill));
-                textArea1.append("\nTax: $" + totalBill*.1);
-                textArea1.append("\nTip: $" + totalBill*.15);
-                textArea1.append("\nYou owe: $" + totalBill*1.25);
+                textArea1.append("Food and drink total is: $" + String.format("%.2f", totalBill));
+                textArea1.append("\nTax: $" + String.format("%.2f", totalBill*.1));
+                textArea1.append("\nTip: $" + String.format("%.2f", totalBill*.15));
+                textArea1.append("\nYou owe: $" + String.format("%.2f", totalBill*1.25));
             }
         }
 
