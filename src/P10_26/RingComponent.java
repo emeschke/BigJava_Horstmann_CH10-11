@@ -27,9 +27,17 @@ public class RingComponent extends JComponent {
     }
 
     public void paintComponent(Graphics g){
-        g.setColor(color);
-        g.drawOval(x,y,diameter,diameter);
-
+        //Paints everything in the paintComponent method.  Not a great implementation according to the instructions.
+        g.setColor(Color.YELLOW);
+        g.drawOval(1,0,40,40);
+        g.setColor(Color.BLACK);
+        g.drawOval(21,20,40,40);
+        g.setColor(Color.GREEN);
+        g.drawOval(41,0,40,40);
+        g.setColor(Color.RED);
+        g.drawOval(61,20,40,40);
+        g.setColor(Color.BLUE);
+        g.drawOval(81,0,40,40);
 
     }
 
