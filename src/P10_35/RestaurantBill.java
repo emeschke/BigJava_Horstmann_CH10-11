@@ -49,7 +49,7 @@ public class RestaurantBill {
         frame.setSize(800,800);
         frame.setVisible(true);
 
-        }
+    }
 
 
 
