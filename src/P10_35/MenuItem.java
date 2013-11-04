@@ -8,9 +8,9 @@ package P10_35;
  * To change this template use File | Settings | File Templates.
  */
 public class MenuItem {
-    String name;
-    double price;
-    int count = 0;
+    private String name;
+    private double price;
+    private int count = 0;
 
 
     public MenuItem(String name, double price){

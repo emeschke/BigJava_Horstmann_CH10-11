@@ -19,7 +19,7 @@ public class TriangleFrame extends JFrame {
     //the arrayList to a component function that draws.
     private static final int FRAME_WIDTH = 300;
     private static final int FRAME_HEIGHT = 400;
-    ArrayList<Point> pointsAList = new ArrayList<Point>();
+    private ArrayList<Point> pointsAList = new ArrayList<Point>();
     private TriangleComponent scene;
 
     class MousePressListener implements MouseListener{

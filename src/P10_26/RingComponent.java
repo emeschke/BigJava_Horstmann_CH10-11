@@ -14,10 +14,10 @@ import java.text.AttributedCharacterIterator;
  */
 
 public class RingComponent extends JComponent {
-    int x;
-    int y;
-    int diameter;
-    Color color;
+    private int x;
+    private int y;
+    private int diameter;
+    private Color color;
 
     public RingComponent(int x, int y, int diameter, Color color){
         this.x = x;
